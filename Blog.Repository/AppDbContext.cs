@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Repository
 {
-    internal class AppDbContext : IdentityDbContext<UserApp,IdentityRole,string>
+    public class AppDbContext : IdentityDbContext<UserApp,IdentityRole,string>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {

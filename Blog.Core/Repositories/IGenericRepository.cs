@@ -12,7 +12,7 @@ namespace Blog.Core.Repositories
         T GetById(int Id);
         IEnumerable<T> GetAll();
         void Add(T entity);
-        void Delete(int id);
+        void Delete(T entity);
         void Update(T entity);
         IQueryable<T> Where(Expression<Func<T, bool>> predicate);
         bool Any(Expression<Func<T, bool>> expression);
