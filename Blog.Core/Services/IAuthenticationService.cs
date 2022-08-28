@@ -9,8 +9,8 @@ namespace Blog.Core.Services
 {
     public interface IAuthenticationService
     {
-        Task<CustomResponse<TokenDTO>> CreateToken(LoginDTO loginDTO);
-        Task<CustomResponse<TokenDTO>> CreateTokenByRefreshToken(string refreshToken);
+        CustomResponse<TokenDTO> CreateToken(LoginDTO loginDTO);
+        CustomResponse<TokenDTO> CreateTokenByRefreshToken(string refreshToken);
         void DeleteRefreshToken(string refreshToken);
     }
 }
