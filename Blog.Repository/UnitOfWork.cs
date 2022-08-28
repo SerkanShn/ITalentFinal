@@ -21,5 +21,9 @@ namespace Blog.Repository
             _context.SaveChanges();
         }
 
+        public void CommitAsync()
+        {
+            _context.SaveChangesAsync();
+        }
     }
 }

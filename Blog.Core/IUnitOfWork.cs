@@ -9,5 +9,6 @@ namespace Blog.Core
     public interface IUnitOfWork
     {
         void Commit();
+        void CommitAsync();
     }
 }
