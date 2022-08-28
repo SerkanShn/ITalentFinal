@@ -9,7 +9,7 @@ namespace Blog.Core.Services
 {
     public interface IUserService
     {
-        CustomResponse<UserAppDTO> CreateUser(CreateUserDTO createUserDTO);
-        CustomResponse<UserAppDTO> GetUserByName(string username);
+        Task<CustomResponse<UserAppDTO>> CreateUser(CreateUserDTO createUserDTO);
+        Task<CustomResponse<UserAppDTO>> GetUserByName(string username);
     }
 }
