@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services
 {
-    internal static class SignService
+    public static class SignService
     {
         public static SecurityKey GetSymmetricKey(string securityKey)
         {

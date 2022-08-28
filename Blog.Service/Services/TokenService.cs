@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Blog.Service.Services
 {
-    class TokenService : ITokenService
+    public class TokenService : ITokenService
     {
         private readonly AppTokenOption _tokenOption;
 
