@@ -9,16 +9,16 @@ namespace Blog.Core.Services
 {
     public interface IGenericService<T,TDTO> where T : class where TDTO : class
     {
-        List<CustomResponse<TDTO>> GetList();
+        List<TDTO> GetList();
 
-        CustomResponse<TDTO> GetById(int id);
+        TDTO GetById(int Id);
 
-        CustomResponse<TDTO> Create(T entity);
+        void Create(TDTO dto);
 
-        void Update(T entity);
+        void Update(TDTO dto);
 
-        void Delete(int id);
-        CustomResponse<IEnumerable<TDTO>> Where(Expression<Func<T, bool>> predicate);
+        void Delete(TDTO dto);
+        IEnumerable<TDTO> Where(Expression<Func<T, bool>> predicate);
         bool Any(Expression<Func<T, bool>> expression);
     }
 }
