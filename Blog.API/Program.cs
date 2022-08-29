@@ -4,6 +4,7 @@ using Blog.Core.Repositories;
 using Blog.Core.Services;
 using Blog.Repository;
 using Blog.Repository.Repositories;
+using Blog.Service;
 using Blog.Service.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -18,9 +19,10 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
+builder.Services.AddHttpContextAccessor();
 builder.Services.Configure<AppTokenOption>(builder.Configuration.GetSection(AppTokenOption.TokenOption));
 
+builder.Services.AddAutoMapper(Assembly.GetAssembly(typeof(MapperProfile)));
 
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
 builder.Services.AddScoped<IUserService, UserService>();
@@ -49,6 +51,7 @@ builder.Services.AddIdentity<UserApp, IdentityRole>(identityOptions =>
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
 
 }).AddJwtBearer(JwtBearerDefaults.AuthenticationScheme, options =>
@@ -60,8 +63,9 @@ builder.Services.AddAuthentication(options =>
         IssuerSigningKey = SignService.GetSymmetricKey(tokenOptions.SecurityKey),
 
         ValidateIssuerSigningKey = true,
-        ValidateIssuer = true,
+        ValidateIssuer = false,
         ValidateLifetime = true,
+        ValidateAudience = false
 
     };
 });
