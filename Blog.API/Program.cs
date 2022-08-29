@@ -19,11 +19,14 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<ITokenService, TokenService>();
-builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.Configure<AppTokenOption>(builder.Configuration.GetSection(AppTokenOption.TokenOption));
+
+
 builder.Services.AddScoped<IAuthenticationService, AuthenticationService>();
-builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped(typeof(IGenericService<,>), typeof(GenericService<,>));
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
@@ -41,7 +44,7 @@ builder.Services.AddIdentity<UserApp, IdentityRole>(identityOptions =>
 }).AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
 
 
-builder.Configuration.GetSection("TokenOption").Get<AppTokenOption>();
+
 
 builder.Services.AddAuthentication(options =>
 {
@@ -73,7 +76,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

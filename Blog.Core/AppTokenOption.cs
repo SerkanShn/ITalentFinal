@@ -8,6 +8,7 @@ namespace Blog.Core
 {
     public class AppTokenOption
     {
+        public const string TokenOption = "TokenOption";
         public string Issuer { get; set; }
         public int AccessTokenExpiration { get; set; }
         public int RefreshTokenExpiration { get; set; }
