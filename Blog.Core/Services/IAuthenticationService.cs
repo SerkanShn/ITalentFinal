@@ -11,6 +11,6 @@ namespace Blog.Core.Services
     {
         Task<CustomResponse<TokenDTO>> CreateToken(LoginDTO loginDTO);
         Task<CustomResponse<TokenDTO>> CreateTokenByRefreshToken(string refreshToken);
-        void DeleteRefreshToken(string refreshToken);
+        Task<CustomResponse<NoDataDto>> DeleteRefreshToken(string refreshToken);
     }
 }

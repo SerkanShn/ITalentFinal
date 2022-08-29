@@ -35,10 +35,10 @@ namespace Blog.Service.Services
             var user = await _userManager.FindByEmailAsync(loginDTO.Email);
 
             if (user == null)
-                return CustomResponse<TokenDTO>.Fail("Kayıtlı kullanıcı yok");
+                return CustomResponse<TokenDTO>.Fail("Kayıtlı kullanıcı yok",400);
 
             if (!await _userManager.CheckPasswordAsync(user, loginDTO.Password))
-                return CustomResponse<TokenDTO>.Fail("Şifre yanlış");
+                return CustomResponse<TokenDTO>.Fail("Şifre yanlış",400);
 
             var tokenDto = _tokenService.CreateToken(user);
             var userRefreshToken = _userRefreshTokenService.Where(x => x.UserId == user.Id).Single();
@@ -51,7 +51,7 @@ namespace Blog.Service.Services
             }
 
             _unitOfWork.CommitAsync();
-            return CustomResponse<TokenDTO>.Success(tokenDto);
+            return CustomResponse<TokenDTO>.Success(tokenDto,200);
 
         }
 
@@ -59,29 +59,32 @@ namespace Blog.Service.Services
         {
             var userRefreshToken = _userRefreshTokenService.Where(x => x.RefreshToken == refreshToken).Single();
             if (userRefreshToken == null)
-                return CustomResponse<TokenDTO>.Fail("Refresh Token Bulunamadı");
+                return CustomResponse<TokenDTO>.Fail("Refresh Token Bulunamadı", 404);
 
             var user = await _userManager.FindByIdAsync(userRefreshToken.UserId);
             if (user == null)
-                return CustomResponse<TokenDTO>.Fail("User bulunamadı");
+                return CustomResponse<TokenDTO>.Fail("User bulunamadı", 404);
 
             var tokenDto = _tokenService.CreateToken(user);
             userRefreshToken.RefreshToken = tokenDto.RefreshToken;
             userRefreshToken.Expiration = tokenDto.RefreshTokenExpiration;
 
             _unitOfWork.CommitAsync();
-            return CustomResponse<TokenDTO>.Success(tokenDto);
+            return CustomResponse<TokenDTO>.Success(tokenDto,200);
         }
 
-        public void DeleteRefreshToken(string refreshToken)
+        public async Task<CustomResponse<NoDataDto>> DeleteRefreshToken(string refreshToken)
         {
             var userRefreshToken = _userRefreshTokenService.Where(x => x.RefreshToken == refreshToken).Single();
-            if (userRefreshToken != null)
+            if (userRefreshToken == null)
             {
-                _userRefreshTokenService.Delete(userRefreshToken);
-                _unitOfWork.CommitAsync();
+                return CustomResponse<NoDataDto>.Fail("Refresh Token Bulunamadı",404);
             }
 
+            _userRefreshTokenService.Delete(userRefreshToken);
+            _unitOfWork.CommitAsync();
+
+            return CustomResponse<NoDataDto>.Success(200);
         }
     }
 }
