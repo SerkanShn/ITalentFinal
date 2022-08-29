@@ -15,11 +15,12 @@ namespace Blog.Service.Services
     public class UserService : IUserService
     {
         private readonly UserManager<UserApp> _userManager;
-        private readonly Mapper _mapper;
+        private readonly IMapper _mapper;
 
-        public UserService(UserManager<UserApp> userManager)
+        public UserService(UserManager<UserApp> userManager, IMapper mapper)
         {
             _userManager = userManager;
+            _mapper = mapper;
         }
 
         public async Task<CustomResponse<UserAppDTO>> CreateUser(CreateUserDTO createUserDTO)
