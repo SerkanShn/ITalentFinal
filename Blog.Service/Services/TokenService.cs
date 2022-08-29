@@ -3,6 +3,7 @@ using Blog.Core.DTOs;
 using Blog.Core.Entities.Authentication;
 using Blog.Core.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,9 @@ namespace Blog.Service.Services
     {
         private readonly AppTokenOption _tokenOption;
 
-        public TokenService(AppTokenOption tokenOption)
+        public TokenService(IOptions<AppTokenOption> tokenOption)
         {
-            _tokenOption = tokenOption;
+            _tokenOption = tokenOption.Value;
         }
 
         private IEnumerable<Claim> GetClaim(UserApp userApp)
