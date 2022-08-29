@@ -41,7 +41,7 @@ namespace Blog.Service.Services
                 return CustomResponse<TokenDTO>.Fail("Şifre yanlış",400);
 
             var tokenDto = _tokenService.CreateToken(user);
-            var userRefreshToken = _userRefreshTokenService.Where(x => x.UserId == user.Id).Single();
+            var userRefreshToken = _userRefreshTokenService.Where(x => x.UserId == user.Id).SingleOrDefault();
             if (userRefreshToken == null)
                 _userRefreshTokenService.Add(new UserRefreshToken { UserId = user.Id, RefreshToken = tokenDto.RefreshToken, Expiration = tokenDto.RefreshTokenExpiration });
             else
