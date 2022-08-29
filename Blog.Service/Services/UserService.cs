@@ -29,18 +29,18 @@ namespace Blog.Service.Services
             if (!result.Succeeded)
             {
                 var errors = result.Errors.Select(x => x.Description).ToList();
-                return CustomResponse<UserAppDTO>.Fail(errors);
+                return CustomResponse<UserAppDTO>.Fail(errors,400);
             }
-            return CustomResponse<UserAppDTO>.Success(_mapper.Map<UserAppDTO>(user));
+            return CustomResponse<UserAppDTO>.Success(_mapper.Map<UserAppDTO>(user),200);
         }
 
         public async Task<CustomResponse<UserAppDTO>> GetUserByName(string username)
         {
             var user = await _userManager.FindByNameAsync(username);
             if (user == null)
-                return CustomResponse<UserAppDTO>.Fail("Kullanıcı bulunamadı");
+                return CustomResponse<UserAppDTO>.Fail("Kullanıcı bulunamadı",404);
 
-            return CustomResponse<UserAppDTO>.Success(_mapper.Map<UserAppDTO>(user));
+            return CustomResponse<UserAppDTO>.Success(_mapper.Map<UserAppDTO>(user),200);
         }
     }
 }

@@ -10,24 +10,26 @@ namespace Blog.Core
     {
         public T Data { get; set; }
         public List<String> Errors { get; set; }
+        public int StatusCode { get; private set; }
 
-        public static CustomResponse<T> Success()
+
+        public static CustomResponse<T> Success(int statusCode)
         {
-            return new CustomResponse<T>();
+            return new CustomResponse<T> { StatusCode = statusCode };
         }
 
-        public static CustomResponse<T> Success(T Data)
+        public static CustomResponse<T> Success(T Data, int statusCode)
         {
-            return new CustomResponse<T>() { Data = Data};
+            return new CustomResponse<T>() { Data = Data, StatusCode = statusCode };
         }
-        public static CustomResponse<T> Fail(string error)
+        public static CustomResponse<T> Fail(string error, int statusCode)
         {
-            return new CustomResponse<T>() { Errors = new List<string> { error } };
+            return new CustomResponse<T>() { Errors = new List<string> { error }, StatusCode = statusCode };
         }
 
-        public static CustomResponse<T> Fail(List<string> errors)
+        public static CustomResponse<T> Fail(List<string> errors, int statusCode)
         {
-            return new CustomResponse<T>() { Errors = errors };
+            return new CustomResponse<T>() { Errors = errors, StatusCode = statusCode };
         }
     }
 }
