@@ -31,6 +31,8 @@ namespace Blog.Web.Services
             throw new Exception("İşlem gerçekleşirken bir hata meydana geldi.");
         }
 
+
+
         public async Task<PostViewModelById> GetById(int id)
         {
             var response = await _client.GetFromJsonAsync<Response<PostViewModelById>>("post/GetPostById/" + id);

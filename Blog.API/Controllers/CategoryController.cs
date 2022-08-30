@@ -59,7 +59,7 @@ namespace Blog.API.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateProduct(CategoryUpdateDTO categoryDto)
+        public IActionResult UpdateCategory(CategoryUpdateDTO categoryDto)
         {
             _categoryService.Update(_mapper.Map<Category>(categoryDto));
             return new ObjectResult(CustomResponse<NoDataDto>.Success(200)) { StatusCode = 200 };

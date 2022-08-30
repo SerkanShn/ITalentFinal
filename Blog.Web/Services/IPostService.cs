@@ -9,5 +9,7 @@ namespace Blog.Web.Services
 
         Task<List<MiniPostViewModel>> GetLastNPost(int count);
 
+
+
     }
 }

@@ -7,9 +7,11 @@ namespace Blog.Web.Controllers
     {
 
         private readonly IPostService _postService;
-        public BlogController( IPostService postService)
+        private readonly ICategoryService _categoryService;
+        public BlogController(IPostService postService, ICategoryService categoryService)
         {
             _postService = postService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -21,5 +23,17 @@ namespace Blog.Web.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Index(int id)
+        {
+            var posts = await _categoryService.GetAllPostByCategoryId(id);
+            var categoriesWithCount = await _categoryService.GetAllCategoriesWithCount();
+            var lastThreePost = await _postService.GetLastNPost(3);
+
+
+            return View((posts, categoriesWithCount, lastThreePost));
+        }
+
     }
 }

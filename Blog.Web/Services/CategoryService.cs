@@ -23,6 +23,16 @@ namespace Blog.Web.Services
             throw new Exception("İşlem gerçekleşirken bir hata meydana geldi.");
         }
 
-     
+        public async Task<CategoryPostsViewModel> GetAllPostByCategoryId(int id)
+        {
+            var response = await _httpClient.GetFromJsonAsync<Response<CategoryPostsViewModel>>("Category/"+id);
+
+            if (response.Data != null)
+            {
+                return response.Data;
+            }
+
+            throw new Exception("İşlem gerçekleşirken bir hata meydana geldi.");
+        }
     }
 }

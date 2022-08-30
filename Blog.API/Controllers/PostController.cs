@@ -68,7 +68,7 @@ namespace Blog.API.Controllers
 
 
         [HttpPut]
-        public IActionResult UpdateProduct(UpdatePostDTO updatePostDTO)
+        public IActionResult UpdatePost(UpdatePostDTO updatePostDTO)
         {
             _postService.Update(_mapper.Map<Post>(updatePostDTO));
             return new ObjectResult(CustomResponse<NoDataDto>.Success(200)) { StatusCode = 200 };
