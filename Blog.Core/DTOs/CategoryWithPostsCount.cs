@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.DTOs
 {
-    public class CategoryWithPostsDTO
+    public class CategoryWithPostsCount
     {
         public string Title { get; set; }
-        public List<PostDTO> Posts { get; set; }
+        public int PostCount { get; set; }
     }
 }
