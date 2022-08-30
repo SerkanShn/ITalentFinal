@@ -29,7 +29,7 @@
                     @foreach (var item in Model.Item2)
                     {
                          <li class="list-group-item d-flex justify-content-between align-items-center">
-                        @item.Title
+                        <a  asp-controller="Blog" asp-action="Index" asp-route-id="@item.Id">@item.Title</a>
                         <span class="badge alert-success">@item.PostCount</span>
                         </li>
                     }

@@ -38,7 +38,7 @@ namespace Blog.Service.Services
             var list = new List<CategoryWithPostsCount>();
             foreach (var item in category)
             {
-                list.Add(new CategoryWithPostsCount { Title = item.Title, PostCount = item.Posts.Count });
+                list.Add(new CategoryWithPostsCount {Id=item.Id, Title = item.Title, PostCount = item.Posts.Count });
             }
 
             return list;

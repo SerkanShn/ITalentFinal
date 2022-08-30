@@ -1,7 +1,22 @@
+using Blog.Web.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//builder.Services.AddScoped<IPostService, PostService>();
+//builder.Services.AddScoped<ICategoryService, CategoryService>();
+
+builder.Services.AddHttpClient<ICategoryService, CategoryService>(options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["WebApi:BaseUrl"]);
+});
+
+builder.Services.AddHttpClient<IPostService, PostService>(options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["WebApi:BaseUrl"]);
+});
 
 var app = builder.Build();
 
