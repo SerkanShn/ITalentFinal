@@ -1,0 +1,34 @@
+﻿
+@{
+    ViewData["Title"] = "Post";
+}
+
+<main role="main" class="container">
+      <div class="row">
+        <div class="col-md-12 blog-main">
+              
+          <h3 class="pb-3 mb-4 font-italic border-bottom">
+          @ViewBag.post.Title
+          </h3>
+          <div class="blog-post">
+            <p class="blog-post-meta">Oluşturulma Tarihi : @ViewBag.post.CreatedOn</p>
+            <h4>Özet</h4>
+            <p>@ViewBag.post.Summary</p>
+            <hr>
+            <h4>İçerik</h4>
+            <img src="~/pictures/@ViewBag.post.PostBanner" >
+            <p>@ViewBag.post.PostContent</p>
+
+            
+          </div><!-- /.blog-post -->
+
+
+        </div><!-- /.blog-main -->
+
+
+      </div><!-- /.row -->
+      <a class="btn  btn-warning" asp-controller="Blog" asp-action="Update" asp-route-id="@ViewBag.post.Id">Postu Güncelle</a>
+      <a class="btn  btn-danger" asp-controller="Blog" asp-action="Delete" asp-route-id="@ViewBag.post.Id">Postu Sil</a>
+    </main>
+
+
