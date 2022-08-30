@@ -12,10 +12,11 @@ namespace Blog.API.Controllers
     [ApiController]
     public class PostController : ControllerBase
     {
-        private readonly IGenericService<Post> _postService;
+        private readonly IPostService _postService;
         private readonly IMapper _mapper;
 
-        public PostController(IGenericService<Post> postService, IMapper mapper)
+
+        public PostController(IPostService postService, IMapper mapper)
         {
             _postService = postService;
             _mapper = mapper;
@@ -29,6 +30,14 @@ namespace Blog.API.Controllers
             var postDTO = _mapper.Map<List<PostDTO>>(result);
 
             return new ObjectResult(CustomResponse<List<PostDTO>>.Success(postDTO, 200)) { StatusCode = 200 };
+        }
+
+        [HttpGet("{count}")]
+        public IActionResult GetLastNPosts(int count)
+        {
+            var result = _postService.GetLastNPost(count);
+
+            return new ObjectResult(CustomResponse<List<MiniPostViewDTO>>.Success(result, 200)) { StatusCode = 200 };
         }
 
         [HttpPost]
