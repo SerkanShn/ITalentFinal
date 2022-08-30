@@ -19,12 +19,11 @@ namespace Blog.Web.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var posts = await _postService.GetAll();
             var categoriesWithCount = await _categoryService.GetAllCategoriesWithCount();
             var lastThreePost = await _postService.GetLastNPost(3);
 
 
-            return View((posts, categoriesWithCount,lastThreePost));
+            return View(( categoriesWithCount,lastThreePost));
         }
         
         public IActionResult Privacy()

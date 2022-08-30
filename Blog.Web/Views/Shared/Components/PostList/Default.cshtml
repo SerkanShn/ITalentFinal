@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewData["Title"] = "Default";
+}
+
+<h1>Default</h1>
+
+
+
+@model List<PostViewModel>
+
+
+        @foreach (var item in Model)
+        {
+            <div class="card">
+                <h2>@item.Title</h2>
+                <h5>@item.CreatedOn</h5>
+                <div style="height:200px;">
+                    <img style="height: 100%; width: 100%; object-fit: contain" src="~/pictures/@item.PostBanner">
+                </div>
+                <p>@item.Summary</p>
+                <a class="btn btn-sm btn-primary" asp-controller="Blog" asp-action="Post" asp-route-id="@item.Id">Devamını oku</a>
+            </div>
+        }
+
+   
