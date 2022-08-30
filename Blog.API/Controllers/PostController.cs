@@ -32,6 +32,17 @@ namespace Blog.API.Controllers
             return new ObjectResult(CustomResponse<List<PostDTO>>.Success(postDTO, 200)) { StatusCode = 200 };
         }
 
+        [Route("[action]/{id}")]
+        [HttpGet]
+        public IActionResult GetPostById(int id)
+        {
+            var result = _postService.GetById(id);
+
+            var postDTO = _mapper.Map<PostByIdDTO>(result);
+
+            return new ObjectResult(CustomResponse<PostByIdDTO>.Success(postDTO, 200)) { StatusCode = 200 };
+        }
+
         [HttpGet("{count}")]
         public IActionResult GetLastNPosts(int count)
         {
