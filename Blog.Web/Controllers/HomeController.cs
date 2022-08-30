@@ -1,4 +1,5 @@
 ﻿using Blog.Web.Models;
+using Blog.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 
@@ -7,17 +8,25 @@ namespace Blog.Web.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
-        public HomeController(ILogger<HomeController> logger)
+        private readonly IPostService _postService;
+        private readonly ICategoryService _categoryService;
+        public HomeController(ILogger<HomeController> logger, IPostService postService, ICategoryService categoryService)
         {
             _logger = logger;
+            _postService = postService;
+            _categoryService = categoryService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
-        }
+            var posts = await _postService.GetAll();
+            var categoriesWithCount = await _categoryService.GetAllCategoriesWithCount();
+            var lastThreePost = await _postService.GetLastNPost(3);
 
+
+            return View((posts, categoriesWithCount,lastThreePost));
+        }
+        
         public IActionResult Privacy()
         {
             return View();

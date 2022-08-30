@@ -2,7 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-@model (List<PostViewModel>,List<CategoriesWithCountViewModel>)
+@model (List<PostViewModel>,List<CategoriesWithCountViewModel>,List<MiniPostViewModel>)
 
 <div class="row">
     <div class="leftcolumn">
@@ -37,37 +37,23 @@
             </div>
         </div>
         <div class="card">
-            <h3>Popular Post</h3>
+            <h3>Son Gönderiler</h3>
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start active">
+               
+
+                 @foreach (var item in Model.Item3)
+                    {
+                      
+                         
                     <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small>3 days ago</small>
+                        <h5 class="mb-1"><a  asp-controller="Blog" asp-action="Index" asp-route-id="@item.Id">@item.Title</a></h5>
                     </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small>Donec id elit non mi porta.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="text-muted">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action flex-column align-items-start">
-                    <div class="d-flex w-100 justify-content-between">
-                        <h5 class="mb-1">List group item heading</h5>
-                        <small class="text-muted">3 days ago</small>
-                    </div>
-                    <p class="mb-1">Donec id elit non mi porta gravida at eget metus. Maecenas sed diam eget risus varius blandit.</p>
-                    <small class="text-muted">Donec id elit non mi porta.</small>
-                </a>
+                    <p class="mb-1">@item.Summary</p>
+
+                    }
+        
             </div>
         </div>
-        <div class="card">
-            <h3>Follow Me</h3>
-            <p>Some text..</p>
-        </div>
+
     </div>
 </div>
