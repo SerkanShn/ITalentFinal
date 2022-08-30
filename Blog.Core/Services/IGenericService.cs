@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Blog.Core.DTOs;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -7,18 +8,18 @@ using System.Threading.Tasks;
 
 namespace Blog.Core.Services
 {
-    public interface IGenericService<T,TDTO> where T : class where TDTO : class
+    public interface IGenericService<T> where T : class 
     {
-        List<TDTO> GetList();
+        List<T> GetList();
 
-        TDTO GetById(int Id);
+        T GetById(int Id);
 
-        void Create(TDTO dto);
+        void Create(T entity);
 
-        void Update(TDTO dto);
+        void Update(T entity);
 
-        void Delete(TDTO dto);
-        IEnumerable<TDTO> Where(Expression<Func<T, bool>> predicate);
+        void Delete(T entity);
+        IEnumerable<T> Where(Expression<Func<T, bool>> predicate);
         bool Any(Expression<Func<T, bool>> expression);
     }
 }
