@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Blog.API.Filters;
 using Blog.Core;
 using Blog.Core.DTOs;
 using Blog.Core.Entities;
@@ -58,6 +59,7 @@ namespace Blog.API.Controllers
             return new ObjectResult(CustomResponse<NoDataDto>.Success(200)) { StatusCode = 200 };
         }
 
+        [ServiceFilter(typeof(NotFoundFilter))]
         [HttpDelete("{id}")]
         public IActionResult DeletePost(int id)
         {

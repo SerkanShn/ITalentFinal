@@ -1,3 +1,4 @@
+using Blog.API.Filters;
 using Blog.Core;
 using Blog.Core.Entities.Authentication;
 using Blog.Core.Repositories;
@@ -34,6 +35,9 @@ builder.Services.AddScoped<IPostRepository, PostRepository>();
 builder.Services.AddScoped(typeof(IGenericService<>), typeof(GenericService<>));
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<NotFoundFilter>();
+
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("SqlServer"),sqlOptions =>
