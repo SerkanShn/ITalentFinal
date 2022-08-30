@@ -11,5 +11,6 @@ namespace Blog.Core.Services
     public  interface ICategoryService : IGenericService<Category>
     {
         public CategoryWithPostsDTO GetCategoryByIdWithPosts(int Id);
+        public List<CategoryWithPostsCount> GetCategoriesWithPostsCount();
     }
 }

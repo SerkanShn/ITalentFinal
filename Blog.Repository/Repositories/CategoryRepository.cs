@@ -15,10 +15,15 @@ namespace Blog.Repository.Repositories
         {
         }
 
+
         public Category GetCategoryByIdWithPosts(int Id)
         {
             return _context.Categories.Include(x => x.Posts).Where(x => x.Id == Id).SingleOrDefault();
+        }
 
+        public List<Category> GetCategoriesWithPostsCount()
+        {
+            return _context.Categories.Include(x => x.Posts).ToList();
         }
     }
 }

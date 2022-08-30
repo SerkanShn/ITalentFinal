@@ -31,6 +31,18 @@ namespace Blog.API.Controllers
             return new ObjectResult(CustomResponse<List<CategoryDTO>>.Success(categoriesDto, 200)) { StatusCode = 200 };
         }
 
+        [Route("[action]")]
+        [HttpGet]
+        public IActionResult GetCategoriesWithCounts()
+        {
+            var result = _categoryService.GetCategoriesWithPostsCount();
+
+            var categoriesDto = _mapper.Map<List<CategoryWithPostsCount>>(result);
+
+            return new ObjectResult(CustomResponse<List<CategoryWithPostsCount>>.Success(categoriesDto, 200)) { StatusCode = 200 };
+        }
+
+
         [HttpGet("{id}")]
         public IActionResult GetCategoryWithPosts(int id)
         {

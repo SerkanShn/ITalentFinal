@@ -32,5 +32,17 @@ namespace Blog.Service.Services
             return categoryDto;
         }
 
+        public List<CategoryWithPostsCount> GetCategoriesWithPostsCount()
+        {
+            var category = _categoryRepository.GetCategoriesWithPostsCount();
+            var list = new List<CategoryWithPostsCount>();
+            foreach (var item in category)
+            {
+                list.Add(new CategoryWithPostsCount { Title = item.Title, PostCount = item.Posts.Count });
+            }
+
+            return list;
+        }
+
     }
 }

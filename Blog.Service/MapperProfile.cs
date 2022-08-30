@@ -19,6 +19,7 @@ namespace Blog.Service
             CreateMap<Post, CreatePostDTO>().ReverseMap();
             CreateMap<Post, UpdatePostDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Category, CategoryWithPostsCount>().ReverseMap();
             CreateMap<Category, CategoryUpdateDTO>().ReverseMap();
             CreateMap<Category, CategoryWithPostsDTO>().ReverseMap();
             CreateMap<Comment, CommentDTO>().ReverseMap();
