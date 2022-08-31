@@ -1,5 +1,6 @@
 using Blog.Web.Services;
 using Microsoft.Extensions.FileProviders;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,8 @@ builder.Services.AddControllersWithViews();
 
 //builder.Services.AddScoped<IPostService, PostService>();
 //builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
 
 builder.Services.AddHttpClient<ICategoryService, CategoryService>(options =>
 {

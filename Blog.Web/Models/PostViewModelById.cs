@@ -10,6 +10,8 @@ namespace Blog.Web.Models
         public string? PostBanner { get; set; }
         public string PostContent { get; set; }
         public DateTime CreatedOn { get; set; }
+        public int CategoryId { get; set; }
+
         public ICollection<Comment> Comments { get; set; }
     }
 }

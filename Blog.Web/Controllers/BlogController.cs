@@ -1,4 +1,5 @@
-﻿using Blog.Web.Models;
+﻿using AutoMapper;
+using Blog.Web.Models;
 using Blog.Web.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -12,11 +13,13 @@ namespace Blog.Web.Controllers
         private readonly IPostService _postService;
         private readonly ICategoryService _categoryService;
         private readonly IFileProvider _fileProvider;
-        public BlogController(IPostService postService, ICategoryService categoryService, IFileProvider fileProvider)
+        private readonly IMapper _mapper;
+        public BlogController(IPostService postService, ICategoryService categoryService, IFileProvider fileProvider, IMapper mapper)
         {
             _postService = postService;
             _categoryService = categoryService;
             _fileProvider = fileProvider;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -82,6 +85,45 @@ namespace Blog.Web.Controllers
 
 
             return View((posts, categoriesWithCount, lastThreePost));
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Update(int id)
+        {
+            var categoryList = await _categoryService.GetAllCategories();
+
+
+            ViewBag.selectList = new SelectList(categoryList, "Id", "Title");
+            
+            var postUpdateViewModel = _mapper.Map<PostUpdateViewModel>(await _postService.GetById(id));
+
+            return View(postUpdateViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Update(PostUpdateViewModel request, IFormFile photo)
+        {
+            if (photo != null && photo.Length > 0)
+            {
+
+
+                var root = _fileProvider.GetDirectoryContents("wwwroot");
+                var picturesDirectory = root.Single(x => x.Name == "pictures");
+
+
+                var path = Path.Combine(picturesDirectory.PhysicalPath, photo.FileName);
+
+
+                using var stream = new FileStream(path, FileMode.Create);
+                await photo.CopyToAsync(stream);
+
+                request.PostBanner = photo.FileName;
+            }
+
+
+            _postService.Update(request);
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+
         }
 
     }

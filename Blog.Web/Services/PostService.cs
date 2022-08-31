@@ -78,5 +78,12 @@ namespace Blog.Web.Services
             }
             throw new Exception("İşlem gerçekleşirken bir hata meydana geldi.");
         }
+
+        public async void Update(PostUpdateViewModel postUpdateViewModel)
+        {
+           await _client.PutAsJsonAsync<PostUpdateViewModel>("Post", postUpdateViewModel);
+        }
+
+    
     }
 }
