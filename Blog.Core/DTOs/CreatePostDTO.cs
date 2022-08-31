@@ -16,6 +16,6 @@ namespace Blog.Core.DTOs
         public DateTime CreatedOn { get; set; } = DateTime.Now;
         public DateTime? EditedOn { get; set; }
         public int CategoryId { get; set; }
-        public string UserId { get; set; }
+        public string UserId { get; set; } = "1dd44c94-dd77-4b1d-a9b9-09283538e65a";
     }
 }
