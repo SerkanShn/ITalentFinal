@@ -82,7 +82,8 @@ namespace Blog.Web.Controllers
             var posts = await _categoryService.GetAllPostByCategoryId(id);
             var categoriesWithCount = await _categoryService.GetAllCategoriesWithCount();
             var lastThreePost = await _postService.GetLastNPost(3);
-
+            var cookie = HttpContext.Request.Cookies["token"];
+            ViewBag.token = cookie;
 
             return View((posts, categoriesWithCount, lastThreePost));
         }
