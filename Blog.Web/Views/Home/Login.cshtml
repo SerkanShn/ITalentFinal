@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+@model LoginViewModel
+
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card border-0 shadow rounded-3 my-5">
+          <div class="card-body p-4 p-sm-5">
+            <h5 class="card-title text-center mb-5 fw-light fs-5">Giriş Yap</h5>
+            <form asp-controller="Home" asp-action="Login" method="post">
+              <div class="form-floating mb-3">
+                <input type="email" class="form-control" asp-for="Email">
+                <label asp-for="Email">Email Adresiniz</label>
+              </div>
+              <div class="form-floating mb-3">
+                <input type="password" class="form-control" asp-for="Password">
+                <label  asp-for="Password">Şifreniz</label>
+              </div>
+
+              <div class="d-grid">
+                <button class="btn btn-success " type="submit">Giriş Yap</button>
+              </div>
+              <hr class="my-4">
+               <div class="d-grid">
+                   <a  class="btn btn-primary" asp-controller="Home" asp-action="Register">Kayıt Ol</a>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

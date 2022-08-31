@@ -18,6 +18,11 @@ builder.Services.AddHttpClient<IPostService, PostService>(options =>
     options.BaseAddress = new Uri(builder.Configuration["WebApi:BaseUrl"]);
 });
 
+builder.Services.AddHttpClient<IUserService, UserService>(options =>
+{
+    options.BaseAddress = new Uri(builder.Configuration["WebApi:BaseUrl"]);
+});
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

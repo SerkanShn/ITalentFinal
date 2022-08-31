@@ -3,7 +3,6 @@
 }
 
 @model (List<CategoriesWithCountViewModel>,List<MiniPostViewModel>)
-
 <div class="row">
     <div class="leftcolumn">
 
@@ -43,6 +42,12 @@
         
             </div>
         </div>
+
+        @if(@ViewBag.token!=null){
+         <div class="card">
+            <a class="btn btn-success" asp-controller="Blog" asp-action="Create">Post Oluştur</a>
+        </div>
+        }
 
     </div>
 </div>
