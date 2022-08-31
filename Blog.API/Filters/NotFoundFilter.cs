@@ -33,6 +33,8 @@ namespace Blog.API.Filters
 
                 context.Result = new NotFoundObjectResult(CustomResponse<NoDataDto>.Fail("Geçerli id veritabanından bulunamadı", 404));
             }
+            else
+                next.Invoke();
 
         }
     }
