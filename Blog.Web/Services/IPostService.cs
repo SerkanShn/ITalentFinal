@@ -6,7 +6,7 @@ namespace Blog.Web.Services
     {
         Task<List<PostViewModel>> GetAll();
         Task<PostViewModelById> GetById(int id);
-
+        void Delete(int id);
         Task<List<MiniPostViewModel>> GetLastNPost(int count);
 
 

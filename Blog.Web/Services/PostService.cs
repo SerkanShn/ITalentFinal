@@ -13,6 +13,11 @@ namespace Blog.Web.Services
             _logger = logger;
         }
 
+        public async void Delete(int id)
+        {
+             await _client.DeleteAsync("post/"+id);
+        }
+
         public async Task<List<PostViewModel>> GetAll()
         {
             

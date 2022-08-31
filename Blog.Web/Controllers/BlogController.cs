@@ -24,6 +24,14 @@ namespace Blog.Web.Controllers
             return View();
         }
 
+        public IActionResult Delete(int id)
+        {
+
+            _postService.Delete(id);
+
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
         [HttpGet]
         public async Task<IActionResult> Index(int id)
         {
