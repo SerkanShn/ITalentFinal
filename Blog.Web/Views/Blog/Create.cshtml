@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+@model PostCreateViewModel
+
+<form asp-controller="Blog" asp-action="Create" method="post" enctype="multipart/form-data">
+
+
+    <div class="mb-3">
+        <label asp-for="CategoryId" class="form-label">Kategori :</label>
+        <select class="form-select" asp-for="CategoryId" asp-items="@ViewBag.selectList">
+        </select>
+        <span class="text-danger" asp-validation-for="CategoryId"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="Title" class="form-label">Post Başlığı :</label>
+        <input class="form-control" asp-for="Title">
+        <span class="text-danger" asp-validation-for="Title"></span>
+    </div>
+
+    <div class="mb-3">
+        <label asp-for="Summary" class="form-label">Post Özeti :</label>
+        <input class="form-control" asp-for="Summary">
+        <span class="text-danger" asp-validation-for="Summary"></span>
+    </div>
+
+
+    <div class="mb-3">
+        <label asp-for="PostContents" class="form-label">Post İçeriği :</label>
+        <textarea class="form-control" rows="4" cols="50" asp-for="PostContents"> </textarea>
+        <span class="text-danger" asp-validation-for="PostContents"></span>
+
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label" for="photo">Post Resmi :</label>
+        <input type="file" class="form-control" name="photo" />
+    </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Post Oluştur</button>
+</form>
+
+@section Scripts
+    {
+
+
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+
+}

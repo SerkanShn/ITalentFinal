@@ -21,6 +21,7 @@ namespace Blog.Service
             CreateMap<Post, MiniPostViewDTO>().ReverseMap();
             CreateMap<Post, PostByIdDTO>().ReverseMap();
             CreateMap<Category, CategoryDTO>().ReverseMap();
+            CreateMap<Category, CategoryWithIdDTO>().ReverseMap();
             CreateMap<Category, CategoryWithPostsCount>().ReverseMap();
             CreateMap<Category, CategoryUpdateDTO>().ReverseMap();
             CreateMap<Category, CategoryWithPostsDTO>().ReverseMap();

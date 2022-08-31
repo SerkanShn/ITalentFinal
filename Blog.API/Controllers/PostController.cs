@@ -59,6 +59,8 @@ namespace Blog.API.Controllers
             return new ObjectResult(CustomResponse<NoDataDto>.Success(200)) { StatusCode = 200 };
         }
 
+    
+
         [ServiceFilter(typeof(NotFoundFilter))]
         [HttpDelete("{id}")]
         public IActionResult DeletePost(int id)

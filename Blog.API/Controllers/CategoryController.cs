@@ -26,9 +26,9 @@ namespace Blog.API.Controllers
         {
             var result = _categoryService.GetList();
 
-            var categoriesDto = _mapper.Map<List<CategoryDTO>>(result);
+            var categoriesDto = _mapper.Map<List<CategoryWithIdDTO>>(result);
 
-            return new ObjectResult(CustomResponse<List<CategoryDTO>>.Success(categoriesDto, 200)) { StatusCode = 200 };
+            return new ObjectResult(CustomResponse<List<CategoryWithIdDTO>>.Success(categoriesDto, 200)) { StatusCode = 200 };
         }
 
         [Route("[action]")]

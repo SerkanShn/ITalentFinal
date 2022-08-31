@@ -11,6 +11,18 @@ namespace Blog.Web.Services
             _httpClient = httpClient;
         }
 
+        public async Task<List<CategoryViewModel>> GetAllCategories()
+        {
+            var response = await _httpClient.GetFromJsonAsync<Response<List<CategoryViewModel>>>("Category");
+
+            if (response.Data != null)
+            {
+                return response.Data;
+            }
+
+            throw new Exception("İşlem gerçekleşirken bir hata meydana geldi.");
+        }
+
         public async Task<List<CategoriesWithCountViewModel>> GetAllCategoriesWithCount()
         {
             var response = await _httpClient.GetFromJsonAsync<Response<List<CategoriesWithCountViewModel>>>("Category/GetCategoriesWithCounts");

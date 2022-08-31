@@ -13,6 +13,12 @@ namespace Blog.Web.Services
             _logger = logger;
         }
 
+        public async Task<HttpResponseMessage> Create(PostCreateViewModel postCreateViewModel)
+        {
+            return await _client.PostAsJsonAsync<PostCreateViewModel>("Post", postCreateViewModel);
+        }
+
+
         public async void Delete(int id)
         {
              await _client.DeleteAsync("post/"+id);
